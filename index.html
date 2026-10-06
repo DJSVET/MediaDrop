@@ -235,51 +235,8 @@
             gap: 15px;
         }
 
-        .header-links {
-            display: flex;
-            gap: 20px;
-            font-size: 0.95rem;
-        }
-
-        .header-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .header-links a:hover {
-            color: #fff;
-        }
-
-        /* Кнопка конвертера */
-        .btn-converter {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .btn-converter:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: var(--secondary);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-            transform: translateY(-1px);
-        }
-
-        .btn-converter i {
-            color: var(--secondary);
-        }
-
-        @keyframes slideDown {
+        
+                @keyframes slideDown {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
@@ -896,24 +853,75 @@
             font-size: 0.8rem;
         }
 
-        /* ПОДВАЛ */
-        footer {
+        /* Кнопка смены языка */
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Контейнер подвала и Версия */
+        .bottom-container {
             width: 100%;
-            max-width: 680px;
-
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-
-            padding: 20px 0;
-
-            font-size: 0.85rem;
-            color: var(--text-muted);
-
-            z-index: 10;
-
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            gap: 5px;
             margin-top: 20px;
+            z-index: 10;
+        }
+
+        .github-link {
+            font-size: 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            color: #fff;
+            transform: translateY(-3px) scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+        }
+
+        .version {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        /* ПОДВАЛ (GitHub Иконка) */
+        .github-link {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            font-size: 2rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            color: #fff;
+            transform: translateY(-3px) scale(1.1);
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
         }
 
         /* Общие анимации */
@@ -1018,17 +1026,7 @@
             MediaDrop
         </a>
 
-        <div class="header-right">
-            <a href="#" class="btn-converter">
-                <i class="fas fa-sync-alt"></i>
-                Конвертер
-            </a>
-
-            <div class="header-links">
-                <a href="#">Главная</a>
-                <a href="#">Помощь</a>
-            </div>
-        </div>
+        <button id="langToggle" class="lang-btn">EN</button>
     </header>
 
     <!-- ОСНОВНОЙ БЛОК -->
@@ -1340,18 +1338,12 @@
     </div>
 
     <!-- ПОДВАЛ -->
-    <footer>
-
-        <span>
-            &copy; 2026 MediaDrop. Все права защищены.
-        </span>
-
-        <div class="header-links">
-            <a href="#">Конфиденциальность</a>
-            <a href="#">Условия</a>
-        </div>
-
-    </footer>
+    <div class="bottom-container">
+        <a href="https://github.com/DJSVET/MediaDrop" class="github-link" target="_blank" title="Мой GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <div class="version">v0.2</div>
+    </div>
 
     <script>
 
@@ -2666,6 +2658,119 @@
         // ============================================================
 
         renderHistory();
+
+
+        // ============================================================
+        // ЛОКАЛИЗАЦИЯ (RU / EN)
+        // ============================================================
+        const i18n = {
+            ru: {
+                langName: "EN",
+                subtitle: "Загружайте медиа в один клик",
+                otherServices: " Прочие сервисы",
+                videoText: " Видео",
+                placeholder: "Вставьте ссылку...",
+                searchBtn: "Найти",
+                qualityLabel: "Качество",
+                bestQuality: "Лучшее качество 🔥",
+                historyTitle: " Недавние загрузки",
+                clearBtn: "Очистить"
+            },
+            en: {
+                langName: "RU",
+                subtitle: "Download media in one click",
+                otherServices: " Other services",
+                videoText: " Video",
+                placeholder: "Paste link...",
+                searchBtn: "Search",
+                qualityLabel: "Quality",
+                bestQuality: "Best quality 🔥",
+                historyTitle: " Recent downloads",
+                clearBtn: "Clear"
+            }
+        };
+
+        const dictToasts = {
+            "Ссылка успешно вставлена": "Link pasted successfully",
+            "Разрешите доступ к буферу обмена": "Allow clipboard access",
+            "Введите ссылку на медиа!": "Enter media link!",
+            "Анализируем ссылку...": "Analyzing link...",
+            "Файл успешно найден!": "File found successfully!",
+            "Началось скачивание...": "Download started...",
+            "Файл успешно скачан! 🎉": "File downloaded successfully! 🎉",
+            "История очищена": "History cleared",
+            "Ошибка скачивания": "Download error"
+        };
+
+        let currentLang = localStorage.getItem('app_lang') || 'ru';
+
+        function updateInterfaceLang() {
+            const t = i18n[currentLang];
+            
+            document.getElementById('langToggle').textContent = t.langName;
+            document.querySelector('.header-card p').textContent = t.subtitle;
+            document.querySelector('.service-btn[data-service="other"]').lastChild.textContent = t.otherServices;
+            document.querySelector('.toggle-btn[data-type="video"]').lastChild.textContent = t.videoText;
+            document.getElementById('urlInput').placeholder = t.placeholder;
+            document.querySelector('#fetchBtn span:last-child').textContent = t.searchBtn;
+            document.querySelector('.quality-select label').textContent = t.qualityLabel;
+            
+            const bestOpt = document.querySelector('#qualitySelect option[value="best"]');
+            if(bestOpt) bestOpt.textContent = t.bestQuality;
+
+            document.querySelector('.history-title span').lastChild.textContent = t.historyTitle;
+            document.getElementById('clearHistoryBtn').textContent = t.clearBtn;
+            
+            // Запускаем триггер для кнопки скачивания
+            els.dlText.textContent = els.dlText.textContent; 
+        }
+
+        // Переключение языка по кнопке
+        document.getElementById('langToggle').addEventListener('click', () => {
+            currentLang = currentLang === 'ru' ? 'en' : 'ru';
+            localStorage.setItem('app_lang', currentLang);
+            updateInterfaceLang();
+        });
+
+        // Перехват уведомлений (Toasts) для перевода налету
+        const originalShowToast = showToast;
+        showToast = function(message, type) {
+            if (currentLang === 'en') {
+                if (dictToasts[message]) message = dictToasts[message];
+            }
+            originalShowToast(message, type);
+        };
+
+        // Автоматический перехват и перевод текста на кнопке скачивания "на лету"
+        let isTranslating = false;
+        const dlObserver = new MutationObserver(() => {
+            if(isTranslating) return;
+            isTranslating = true;
+            
+            let text = els.dlText.textContent;
+            if (currentLang === 'en') {
+                if(text.includes('Скачивание')) els.dlText.textContent = text.replace('Скачивание', 'Downloading');
+                if(text === 'Обработка файла...') els.dlText.textContent = 'Processing file...';
+                if(text === 'Подготовка файла...') els.dlText.textContent = 'Preparing file...';
+                if(text === 'Скачать MP3') els.dlText.textContent = 'Download MP3';
+                if(text === 'Скачать Видео') els.dlText.textContent = 'Download Video';
+                if(text === 'Скачать файл') els.dlText.textContent = 'Download file';
+            } else {
+                if(text.includes('Downloading')) els.dlText.textContent = text.replace('Downloading', 'Скачивание');
+                if(text === 'Processing file...') els.dlText.textContent = 'Обработка файла...';
+                if(text === 'Preparing file...') els.dlText.textContent = 'Подготовка файла...';
+                if(text === 'Download MP3') els.dlText.textContent = 'Скачать MP3';
+                if(text === 'Download Video') els.dlText.textContent = 'Скачать Видео';
+                if(text === 'Download file') els.dlText.textContent = 'Скачать файл';
+            }
+            
+            isTranslating = false;
+        });
+        
+        dlObserver.observe(els.dlText, { childList: true, characterData: true, subtree: true });
+
+        // Инициализация языка при загрузке страницы
+        if (currentLang === 'en') updateInterfaceLang();
 
     </script>
 
